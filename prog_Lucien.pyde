@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 """
+Lo que funciona : 
 
-faire test position avant ajouter click souris
->mouvements legaux : dir
-> arbre miini max
 
+> juagar (anadir fichas)
+> Dibujar los lugares legales
+(no sé si las direcciones diagonales funcionan)
+
+>falta actualizar el tablero despues de un torno
 """
 
 nb_squares = 8
@@ -31,18 +34,18 @@ def setup():
             j*size_square+size_square/2,size_square/2,size_square/2)
 
     fill(255,255,255)
-	
+    
     ellipse(3*size_square+size_square/2,3*size_square+size_square/2,\
     size_square/2,size_square/2)
     ellipse(4*size_square+size_square/2,4*size_square+size_square/2,\
-		size_square/2,size_square/2)
+        size_square/2,size_square/2)
 
     fill(0,0,0)
 
     ellipse(3*size_square+size_square/2,4*size_square+size_square/2,\
-		size_square/2,size_square/2)
+        size_square/2,size_square/2)
     ellipse(4*size_square+size_square/2,3*size_square+size_square/2,\
-		size_square/2,size_square/2)
+        size_square/2,size_square/2)
 
     coordinates[3][3]=1
     coordinates[4][4]=1
@@ -77,16 +80,21 @@ def mouseClicked():
 
         hasPlayed = True
 
-        applyChanges(mouseY/size_square , mouseX/size_square)
+        applyChanges((mouseY/size_square , mouseX/size_square))
         prinCoordinates()
 
     except:   # si hay error : position illegal  > do nothing
         pass
 
-def applyChanges():
+def applyChanges(position):
+    global direction
 
-    pass
-    
+
+    for dir in direction:
+        while coordinates[pos[0]+dir[0]][pos[1]+dir[1]] == oppositeColor:
+
+
+
 
 def printCoordinates():
     for i in range(0,nb_squares):
@@ -95,13 +103,12 @@ def printCoordinates():
 
 def legalMooves(turn):
 
-
     piecePosition = []
     
     global legalPositions
     global direction
 
-    for i in range(0,nb_squares):
+    for i in range(0,nb_squares):  # encontrar las fichas del jugador
         for j in range(0,nb_squares):
             if (coordinates[i][j] == turn+1):
                 piecePosition.append((i,j))
