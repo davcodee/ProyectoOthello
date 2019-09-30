@@ -1,4 +1,7 @@
 
+
+# Modelado a partir de un ejemplo disponible en:
+# http://dhconnelly.com/paip-python/docs/paip/othello.html
 INFINITO = sys.maxsize - 1
 
 # Función que calcula el mejor resultado según una busqueda alfa beta de los min
